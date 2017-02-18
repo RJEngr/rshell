@@ -20,10 +20,10 @@ int main(){
   
    
     
-     
+    
   // Commandinfo mycom;
    Executer exec;
-   
+    
    while (exec.comyret()!="exit"){
   
  //   cout << "hello";

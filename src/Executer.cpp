@@ -17,7 +17,7 @@ mine =0;
 
 
 } 
-
+ 
 Executer::~Executer() {
 
 

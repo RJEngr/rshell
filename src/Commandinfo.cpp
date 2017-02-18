@@ -22,7 +22,7 @@ Commandinfo::~Commandinfo() {
 string Commandinfo:: CreateCommand(){
      rawin = in;
 //    cout << rawin.size()  << endl;
-    
+     
     for (unsigned int i=0; i<rawin.size(); i ++){
    
         if (rawin.at(i) == '|' && rawin.at(i+1) == '|'){

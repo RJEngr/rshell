@@ -21,4 +21,4 @@ class Commandinfo : public Command  {
     ~Commandinfo();
     string CreateCommand();
 };
-#endif
+#endif 
