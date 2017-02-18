@@ -49,6 +49,6 @@ bin/Commandinfo.o: ./src/Commandinfo.cpp ./src/Commandinfo.h
 
 bin/Executer.o: ./src/Executer.cpp ./src/Executer.h
 	g++ -c ./src/Executer.cpp 
-	mv *.o ./bin/
+	mv *.o ./bin/ 
 #clean:
 #	rm -rf ./bin/
