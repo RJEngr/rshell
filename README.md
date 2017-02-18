@@ -18,4 +18,8 @@ Bug Report:
 	
 Resolved Bugs:
 	|| may not work sometimes 
+<<<<<<< HEAD
 	
+=======
+	
+>>>>>>> 4ac046d3cd57cd22884812b55e90047c1d6b7eeb
