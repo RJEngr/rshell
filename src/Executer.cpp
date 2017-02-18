@@ -27,7 +27,7 @@ Executer::~Executer() {
 
 
 void Executer:: caller(){
-  for (int i=0; i<cons.size(); i++){
+  for (unsigned int i=0; i<cons.size(); i++){
   	
 if (segs.at(i)=="exit"){
 	comy="exit";

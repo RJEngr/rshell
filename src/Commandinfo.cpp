@@ -23,15 +23,15 @@ string Commandinfo:: CreateCommand(){
      rawin = in;
 //    cout << rawin.size()  << endl;
     
-    for (int i=0; i<rawin.size(); i ++){
+    for (unsigned int i=0; i<rawin.size(); i ++){
    
         if (rawin.at(i) == '|' && rawin.at(i+1) == '|'){
-            for (int j=0; j<i; j++){
+            for (unsigned int j=0; j<i; j++){
                 segcom.push_back(rawin.at(j));
             }
         
             connector = "||";
-            cout << segcom << endl << connector << endl;
+          //  cout << segcom << endl << connector << endl;
             segs.push_back(segcom);
             cons.push_back(connector);
             if(i>1){
@@ -43,12 +43,12 @@ string Commandinfo:: CreateCommand(){
         
         }
         else if (rawin.at(i) == '&' && rawin.at(i+1) == '&'){
-             for (int j=0; j<i; j++){
+             for (unsigned int j=0; j<i; j++){
                 segcom.push_back(rawin.at(j));
             }
             
             connector = "&&";
-            cout << segcom << endl << connector << endl;
+     //       cout << segcom << endl << connector << endl;
             segs.push_back(segcom);
             cons.push_back(connector);
               if(i>1){
@@ -58,12 +58,12 @@ string Commandinfo:: CreateCommand(){
        // break;
         }
         else if (rawin.at(i) == ';' ){
-                   for (int j=0; j<i; j++){
+                   for (unsigned int j=0; j<i; j++){
                 segcom.push_back(rawin.at(j));
             }
             
             connector = ";";
-            cout << segcom << endl << connector << endl;
+    //        cout << segcom << endl << connector << endl;
                 segs.push_back(segcom);
            cons.push_back(connector);
               if(i>1){
@@ -73,11 +73,11 @@ string Commandinfo:: CreateCommand(){
             segcom="";
         }
         else if (rawin.at(i) == '#' ){
-            for (int j=0; j<i; j++){
+            for (unsigned int j=0; j<i; j++){
                 segcom.push_back(rawin.at(j));
             }
             connector="";
-             cout << segcom << endl << connector << endl;
+          //   cout << segcom << endl << connector << endl;
                 segs.push_back(segcom);
            cons.push_back(connector);
           
@@ -92,11 +92,11 @@ string Commandinfo:: CreateCommand(){
         
         else if(i==rawin.size()-1 && rawin.at(i) != '&' && rawin.at(i) != '|'&& rawin.at(i) != ';'&& rawin.at(i) != '#'  ) {//commands with no connectors are not saved
            // cout << rawin.size();
-             for (int j=0; j<=i; j++){
+             for (unsigned int j=0; j<=i; j++){
                 segcom.push_back(rawin.at(j));
             }
             connector="";
-             cout << segcom << endl << connector << endl;
+          //   cout << segcom << endl << connector << endl;
                 segs.push_back(segcom);
            cons.push_back(connector);
               if(i>1){
@@ -110,18 +110,18 @@ string Commandinfo:: CreateCommand(){
         
             
         else if(rawin.at(i) == 'e' && rawin.at(i+1) == 'x'&& rawin.at(i+2) == 'i'&& rawin.at(i+3) == 't'  ) {//commands with no connectors are not saved
-           // cout << rawin.size();
-             for (int j=0; j<i; j++){
+           // cout << rawin.\size();
+             for (unsigned int j=0; j<i; j++){
                 segcom.push_back(rawin.at(j));
             }
             connector="";
            
                 segs.push_back(segcom);
            cons.push_back(connector);
-             cout << segcom << endl << connector << endl;
+          //   cout << segcom << endl << connector << endl;
              segs.push_back("exit");
              cons.push_back(connector);
-               cout << "exit" << endl << connector << endl;
+        //       cout << "exit" << endl << connector << endl;
        
             segcom="";
             break;

@@ -15,13 +15,13 @@ int main(){
    // test.erase(0,5);
    // cout << test;
     
-    int t=0;
+   // int t=0;
     
   
    
     
     
-   Commandinfo mycom;
+  // Commandinfo mycom;
    Executer exec;
    
    while (exec.comyret()!="exit"){
