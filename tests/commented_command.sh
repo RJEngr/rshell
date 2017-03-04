@@ -1,2 +1,2 @@
 #!/bin/sh
-../bin/rshell < multiplecomments.txt
+../bin/rshell < commented_test.txt

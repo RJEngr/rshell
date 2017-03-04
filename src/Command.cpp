@@ -27,7 +27,7 @@ Command :: ~Command(){
 
 
 
-void Command:: print (){ 
+void Command:: print (){
      cout << outputc << " ";
 }
 void Command:: input (){

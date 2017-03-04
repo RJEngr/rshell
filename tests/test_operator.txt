@@ -1,0 +1,24 @@
+
+test test.txt
+test -e test.txt
+test -f test.txt
+test -d test_dir
+test -f test_dir
+test -d test.txt
+test -e test.txt && echo A
+[ -e test.txt ] || echo B
+(test -e test.txt)
+[ -d test.txt ]
+(test -e test.txt && echo A)
+([ -d test.txt ] && echo B)
+(test -d test.txt && (echo "True A" && echo "True B"))
+(test -e test.txt && (echo "True A" && echo "True B"))
+
+
+
+test -e bingo;.txt
+test -f bingo;.txt
+[ -d bingo;_dir ]
+test -e bingo;.txt || echo A
+test -e bingo;.txt && echo B
+exit

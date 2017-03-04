@@ -12,13 +12,25 @@ class Commandinfo : public Command  {
     string rawin;
     string connector;
     string segcom;
+    string parsedin;
    int mine;
     vector <string> segs;
     vector <string> cons;
+    string inner;
+    int ando;
+    int oro;
+    int semio;
+    int zolo;
+    
+    
+    
     
     public:
     Commandinfo();
     ~Commandinfo();
     string CreateCommand();
+    void Parparser(int suc);
+    int stringempty();
+    int parexist();
 };
-#endif 
+#endif

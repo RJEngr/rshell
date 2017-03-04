@@ -1,7 +1,0 @@
-echo test#hello world
-git status # gasgs
-false || true #Brian
-dir && echo #Crites
-ls -a #Best way to wipe hard drive
-#rm -rf /
-exit

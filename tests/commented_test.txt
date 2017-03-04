@@ -1,0 +1,11 @@
+( echo A ) 
+( echo A # && echo B ) 
+( echo A #|| echo B ) 
+( echo A && ( echo A )) 
+( echo A || ( echo B )) 
+( echo A && (echo A )#&& (echo A ))) 
+( [ -e test.txt ]) && (echo A ) # some comment
+( echo A || echo B ) && echo A #comment
+# comment ( echo A && echo A) && (echo A && echo A) 
+( echo A && echo A) #|| (echo B && echo B) 
+exit

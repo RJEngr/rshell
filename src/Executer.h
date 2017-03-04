@@ -6,6 +6,7 @@
 #include <vector>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <sys/stat.h>
 #include <unistd.h>
 #include <time.h>
 #include <stdio.h>
@@ -23,7 +24,7 @@ class Executer : public Commandinfo{
     char* chargar;
     int pof;
     string comy;
-   
+   char* arg;
        int mine;
      
   
@@ -38,6 +39,8 @@ class Executer : public Commandinfo{
     void caller();
     string  comyret();
     void clear();
+    int Test(string comy);
+    int miner();
 };
 
 #endif

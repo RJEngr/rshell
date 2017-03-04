@@ -1,5 +1,5 @@
 # rshell
-CS100 Project, Assignment 2
+CS100 Project, Assignment 3
 
 Introduction: 
 This assignment we create a shell terminal to run basic commands.
@@ -7,15 +7,19 @@ New Implementation:
 Everything
 
 Bugs:
-None that are known
+connector by itself breaks program
+ANy command must be followed by a space
+Sometimes going from true to false test file doesnt work
 
 
 TODO:
-	optimize code
+	resolve the issue with test 
 
 Bug Report:
 	Stable
 	
 Resolved Bugs:
 	|| may not work sometimes 
+	( open parns are not used
+	
 	
