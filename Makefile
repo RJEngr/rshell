@@ -14,7 +14,7 @@ OBJDIR= bin
 	
 OBJS = ./bin/Command.o ./bin/Commandinfo.o ./bin/Executer.o
 
-
+ 
 # objdir =bin
 # MKPATH = mkdir -p
 
