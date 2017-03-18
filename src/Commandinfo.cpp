@@ -11,13 +11,11 @@ using namespace std;
 
 
 Commandinfo::Commandinfo() {
-  // rawin = "";
-//   cout << "test "  << endl;
 } 
 
 Commandinfo::~Commandinfo() {
 
-} 
+}
 
 
 int Commandinfo:: parexist(){
@@ -213,7 +211,7 @@ int Commandinfo:: stringempty (){
 
 string Commandinfo:: CreateCommand(){
     
-    for (unsigned int i=0; i<rawin.size(); i ++){
+    for (unsigned int i=0; i<rawin.size(); i++){
    
         if (rawin.at(i) == '|' && rawin.at(i+1) == '|'){
             for (unsigned int j=0; j<i; j++){
@@ -277,7 +275,7 @@ string Commandinfo:: CreateCommand(){
                 segcom.push_back(rawin.at(j));
             }
             connector="";
-         
+     //    cout<<segcom<< endl;
                 segs.push_back(segcom);
            cons.push_back(connector);
               if(i>1){
@@ -302,8 +300,83 @@ string Commandinfo:: CreateCommand(){
             break;
             
         }
+       
+          else if (rawin.at(i) == '>' && rawin.at(i+1) != '>'){
+             
+        //       cout << "I worked" <<endl;
+             
+                    for (unsigned int j=0; j<i; j++){
+                segcom.push_back(rawin.at(j));
+            }
         
+            connector = ">";
+       //     cout << segcom << endl;
+       //     cout << connector << endl;
+            segs.push_back(segcom);
+            cons.push_back(connector);
+            if(i>1){
+                rawin.erase(0, i+1);
+            i=0;}
+      
+            segcom="";
+            
+            
+            
+            
+        }
+         else if (rawin.at(i) == '<' && rawin.at(i+1) != '<'){
+            for (unsigned int j=0; j<i; j++){
+                segcom.push_back(rawin.at(j));
+            }
         
+            connector = "<";
+            segs.push_back(segcom);
+            cons.push_back(connector);
+            if(i>1){
+                rawin.erase(0, i+1);
+            i=0;
+
+            }
+      
+            segcom="";
+            
+            
+            
+            
+        }
+         else if (rawin.at(i) == '>' && rawin.at(i+1) == '>'){
+            for (unsigned int j=0; j<i; j++){
+                segcom.push_back(rawin.at(j));
+            }
+        
+            connector = ">>";
+            segs.push_back(segcom);
+            cons.push_back(connector);
+            if(i>1){
+                rawin.erase(0, i+2);
+            i=0;
+            }
+      
+            segcom="";
+            
+        }
+        
+         else if (rawin.at(i) == '|' && rawin.at(i+1) != '|'){
+            for (unsigned int j=0; j<i; j++){
+                segcom.push_back(rawin.at(j));
+            }
+            connector = "|";
+            segs.push_back(segcom);
+            cons.push_back(connector);
+            if(i>1){
+                rawin.erase(0, i+1);
+            i=0;
+            }
+            segcom="";
+            
+            
+            
+        }
         
         
     }

@@ -10,8 +10,6 @@
 using namespace std;
 
 
-
-
 Executer::Executer() {
 mine =0;
 
@@ -27,19 +25,150 @@ Executer::~Executer() {
 
 
 void Executer:: caller(){
-  //      cout <<segs.at(andpos)<< " Im her 1" ;
+ 
+
+    for (int i=0; i<segs.size(); i++){
+        cout << segs.at(i)<< "  ";
+    }
+    
+    cout <<endl;
+    
+    
+    
+    //    cout <<segs.at(andpos)<< " Im her 1" ;
     if (segs.size()> 0){
-     createproc(segs.at(0));
-     comy.clear();}
+   }
 	
   for (unsigned int i=0; i<cons.size(); i++){
+     // cout<< cons.at(i)<< "    "<< i <<endl;
+      
   	
 if (segs.at(i)=="exit"){
 	comy="exit";
 	
 	return;
 }
+ if (cons.at(0) != ">" && cons.at(0) != ">>" && cons.at(0)!= "<"&& cons.at(0)!= "|"){
+  if (i==0) {
+       createproc(segs.at(0));
+     comy.clear();
+    }
+ }
+ 
+ 
+ 
+ 
+  if ((i+1<cons.size() && cons.at(i+1)==">") || (cons.size()==2 && cons.at(i)==">")){
+   
+   if (cons.at(0) == ">" && i==0){
+  //  cout << " Output file runninghere"<< endl; output file is the first
+  outputFile(i+1);
+       createproc(segs.at(0));
+     comy.clear();
+    
+ }
+   
+   else { 
+    //output file not first
+    // 	cout << "OUTPUT FILE RUN" << endl;
+     
+     if (i+2<cons.size()){
+     
+      outputFile(i+2);}
+      
+      
+    
+      
+       if  (i>0 && (cons.at(i-1) == ">" || cons.at(i-1) == ">>" || cons.at(i- 1) == "|" || cons.at(i-1) == "<")) {
+     
+         createproc(segs.at(i-1));
+     
+      comy.clear();
+      
+        }
+        
+   
+   }
+}
 
+   
+
+
+     if ((i+1<cons.size() && cons.at(i+1)==">>") || (cons.size()==2 && cons.at(i)==">>")){
+     	
+     	 if (cons.at(0) == ">>" && i==0){
+     //	  cout << "OUTPUT FILE RUN SINGLE" << endl; //if ow is the first
+    outputFileOverwrite(i+1);
+       createproc(segs.at(0));
+    comy.clear();
+   
+ }
+   
+   else {
+    // 	cout << "OUTPUT FILE RUN OW" << endl; //if multiple commands and ow is not the first
+      outputFileOverwrite(i+2);
+      if (i-1 != 0 && (cons.at(i-1) == ">" || cons.at(i-1) == ">>" || cons.at(i-1) == "|" | cons.at(i-1) == "<") ){
+        createproc(segs.at(i-1));
+     comy.clear();}
+   }
+     	
+     
+    }
+    
+  	   
+  // cout << cons.at(0) << endl; 	 
+   if (cons.at(0) == "<" && i==0){
+    
+  //  cout << "input file running single" << endl;
+    inputFile(1);
+  //  cout << "afters ice cream" << endl;
+    createproc(segs.at(0));
+    comy.clear();
+    
+ }
+   else if(i<cons.size()-1 && i+1<cons.size() && cons.at(i+1)=="<") {
+   //  	cout << "INPUT FILE RUN";
+      inputFile(i+2);
+   //   cout << "afters ice cream";
+      // I now want ice cream
+      if (i>0 && (cons.at(i-1) == ">" || cons.at(i-1) == ">>" || cons.at(i-1) == "|" | cons.at(i-1) == "<") ){
+        createproc(segs.at(i-1));
+     comy.clear();
+       
+      }
+   }
+       
+    
+ 
+ 
+    
+    
+    
+    
+    if ((i+1<cons.size() && cons.at(i+1)=="|") || (cons.size()==2 && cons.at(i)=="|")){
+     	  	 
+   if (cons.at(0) == "|" && i==0){
+   // cout << " input output file running single"<< endl;
+    pipecounter=0;
+    x=i;
+   while (cons.at(x) == "|" && x<cons.size() ){
+     pipecounter=pipecounter+1;
+     x=x+1;
+    }
+  //  cout << pipecounter << "pipecounter" << endl;
+    outtoin(i, pipecounter);
+     //  createproc(segs.at(0));
+     comy.clear();
+    
+    
+     }
+   
+  /* if (i+1<cons.size() && cons.at(i+1)=="|") {
+     	cout << "INPUT OUTPUT FILE RUN multiple" << endl;
+    outtoin(i+1);
+   }*/
+    }
+ 
     if (cons.at(i)=="&&"){
       AND(i);
     }
@@ -50,6 +179,32 @@ if (segs.at(i)=="exit"){
      	
       SEMI(i);
     }
+    
+    
+     if ((i+1<cons.size() && cons.at(i+1)==">") || (cons.size()==2 && cons.at(i)==">") || 
+        (i+1<cons.size() && cons.at(i+1)==">>") || (cons.size()==2 && cons.at(i)==">>") ){
+     
+      closeFile();
+      //continue;
+    }
+    
+  
+    
+    if ((i<cons.size()-1 && i+1<cons.size() && cons.at(i+1)=="<") || (cons.size()>=2 && cons.at(0)=="<" && i==0))
+    {
+    
+     //cout << "file closed";
+   
+     closeinFile();
+    // continue;
+    }
+    
+     if ((i+1<cons.size() && cons.at(i+1)=="|") || (cons.size()==2 && cons.at(i)=="|"))
+    {
+     
+     closeinoFile();
+   //  continue;
+    }
    /*  if (cons.at(i)==""){
      	if (i==0){
          createproc(segs.at(i));
@@ -58,10 +213,9 @@ if (segs.at(i)=="exit"){
     }*/
   }
 }
-
+ 
 void Executer:: AND(int andpos){
- // cout << "Trigged";
-  	//Always execute left_command
+ 
 
 	//Only execute right_command if left_Command is 1
 	if(mine == 1){
@@ -114,7 +268,143 @@ void Executer:: SEMI(int semipos){
   
 }
 
+void Executer:: outputFile(int filepos){ // >
+ 
+ 
+ 
+ saved_stdout = dup(1);
+ 
+ // remove spaces from file name
 
+  filenameoutput= segs.at(filepos);
+ for (unsigned b=0; b<filenameoutput.size(); b++){
+  if (filenameoutput.at(b)==' ')
+  filenameoutput.erase(b, b+1);
+ }
+ //cout <<filenameoutput <<endl;
+ 
+ out = open(filenameoutput.c_str(), O_WRONLY | O_TRUNC | O_CREAT, S_IRUSR | S_IRGRP | S_IWGRP | S_IWUSR | S_IXUSR | S_IXGRP);
+
+ dup2(out, 1);
+ 
+ close(out);
+//cout << "6 "<< endl;
+ 
+ 
+ 
+}
+
+void Executer::inputFile(int filepos){ // 
+
+
+
+
+ saved_stdin = dup(0);
+  filenameinput= segs.at(filepos);
+  
+  
+  for (unsigned b=0; b<filenameinput.size(); b++){
+  if (filenameinput.at(b)==' ')
+  filenameinput.erase(b, b+1);
+ }
+ // cout << filenameinput<<endl;
+  // open input file here
+  
+ in = open(filenameinput.c_str(), O_RDONLY, 0);
+ // cout << in << endl;
+ dup2(in, STDIN_FILENO);
+ close(in);
+ // finished input
+ //cout << "finished in put"<< endl;
+// cout << "7 "<< endl;
+ 
+ 
+}
+
+
+
+
+void Executer:: closeFile(){ // >
+ // restore for return to terminal output
+dup2(saved_stdout, 1);
+close(saved_stdout);
+
+ 
+}
+
+void Executer:: closeinFile(){ // >
+ // restore for return to terminal input
+dup2(saved_stdin, 0);
+close(saved_stdin);
+
+ 
+}
+void Executer:: closeinoFile(){ // >
+ 
+dup2(saved_stdin, 0);
+close(saved_stdin);
+dup2(saved_stdout, 1);
+close(saved_stdout);
+}
+
+void Executer:: outputFileOverwrite(int filepos){
+ 
+  // save for return to terminal output
+ saved_stdout = dup(1);
+ 
+ 
+
+  filenameoutput= segs.at(filepos);
+ 
+ // open file w/ proper permissions creates if its missing
+ out = open(filenameoutput.c_str(), O_WRONLY | O_APPEND | O_CREAT, S_IRUSR | S_IRGRP | S_IWGRP | S_IWUSR | S_IXUSR | S_IXGRP);
+
+ dup2(out, 1);
+ 
+ close(out);
+
+ 
+ 
+ 
+ 
+}
+
+
+void Executer:: outtoin(int filepos, int pipecounter){
+ 
+  filein=0;
+   int  piped[2];
+   
+ 
+  cmcount=0;
+
+  while (cmcount <=pipecounter)
+    {
+      pipe(piped);
+      if ((pid = fork()) == -1)
+        {
+          exit(1);
+        }
+      else if (pid == 0)
+        {
+          dup2(filein, 0); //change input to old
+          if (cmcount  != pipecounter)
+            dup2(piped[1], 1);
+          close(piped[0]);
+        createproc(segs.at(filepos+cmcount));
+          exit(1);
+        }
+      else
+        {
+          wait(NULL);
+          close(piped[1]);
+          filein = piped[0]; //next in[put ] command
+          cmcount++;
+        }
+    }
+
+
+}
 
 
 void Executer:: createproc(string comy){
@@ -163,36 +453,27 @@ if (comy=="exit"){
         cout<< "Child was aborted"<< endl;
      //   kill(pid, SIGKILL);
      	exit(1);
-     //   zeus.at(0) = 0;
-        //cout << zeus.at(0) << endl;
-     //   return 0;
        }
 
 
 	if (pid == 0) {
 
 //		cout<< "Child was executed"<< endl;
+
+
+
+ 
 	    execvp(array[0], array);
 	   
 
 		
 		
 		    cout<< "Failure: Command unknown"<< endl;
-		//    kill(pid, SIGKILL);
-		    
-	
-	
-		
-		
-		
-		// The demon was found here 
 		exit(1);
 	
 	
 }
 else { 
-  
- //  cout<< "Child was waited"<< endl;
 		waitpid(pid, &pof, 0);
 		if (pof != 0) {
 		  mine=0;
@@ -201,25 +482,15 @@ else {
 		else {
 		mine =1;	
 		}
-	}
-//zeus.at(0)=0;
-
- 
-//  cout << "CHILD WAS KILLED"<< endl;
-
 			kill(pid, SIGKILL);
-		//	exit (1);
-
-/*if (*zeus.at(0) != 1){
-   cout << *zeus.at(0) << endl;
-  *zeus.at(0) = 0;
-	return 0;
-	
-	
-}*/
- //all hail the king #wemadeitfam
-  //return 0;
 }
+
+}
+
+
+
+
+
 
 string Executer:: comyret(){
 	
@@ -241,8 +512,6 @@ int Executer:: miner(){
 	
 	return mine;
 }
-
-
 
 
 
@@ -333,7 +602,7 @@ int Executer::Test(string comy)
       {
           cout << "(FALSE)"<< endl;
            comy.clear();
-            
+        
           return 1;
       }
      

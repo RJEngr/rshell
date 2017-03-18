@@ -1,7 +1,0 @@
-echo A 
-( echo A && echo B ) 
-( echo A || echo B ) 
-( echo A && ( echo A )) 
-( echo A || ( echo B )) 
-( echo A && ( echo A )&&  echo A 
-( [ -e test.txt ]) && ( echo A ) 

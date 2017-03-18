@@ -29,7 +29,7 @@ class Commandinfo : public Command  {
     Commandinfo();
     ~Commandinfo();
     string CreateCommand();
-    void Parparser(int suc);
+   void Parparser(int suc);
     int stringempty();
     int parexist();
 };
